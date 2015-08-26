@@ -6,10 +6,6 @@ module.exports = function(grunt) {
       views: {
         src: [ 'public/client/*.js' ],
         dest: 'public/js/views.js'
-      },
-      libs: {
-        src: [ 'public/lib/*.js' ],
-        dest: 'public/js/libs.js'
       }
     },
 
@@ -17,10 +13,6 @@ module.exports = function(grunt) {
       views: {
         src: 'public/js/views.js',
         dest: 'public/js/views.min.js'
-      },
-      libs: {
-        src: 'public/js/libs.js',
-        dest: 'public/js/libs.min.js'
       }
     },
 

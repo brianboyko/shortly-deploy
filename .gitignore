@@ -46,4 +46,4 @@ node_modules
 
 ### Remove from Production ###
 /public/client/*.js
-/js/build/*.js
+/app/db/*.sqlite
