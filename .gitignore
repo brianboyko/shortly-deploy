@@ -43,3 +43,7 @@ node_modules
 
 ### Lecture Notes ###
 *notes.txt
+
+### Remove from Production ###
+/public/client/*.js
+/js/build/*.js

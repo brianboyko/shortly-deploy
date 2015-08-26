@@ -3,21 +3,24 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
-      dist: {
-        src: [ 
-        'public/client/*.js',
-        'public/lib/*.js',
-        'app/lib/*.js'
-                //your code here
-        ],
-        dest: 'js/build/production.js'
+      views: {
+        src: [ 'public/client/*.js' ],
+        dest: 'public/js/views.js'
+      },
+      libs: {
+        src: [ 'public/lib/*.js' ],
+        dest: 'public/js/libs.js'
       }
     },
 
     uglify: {
-      build: {
-        src: 'js/build/production.js',
-        dest: 'js/build/production.min.js'
+      views: {
+        src: 'public/js/views.js',
+        dest: 'public/js/views.min.js'
+      },
+      libs: {
+        src: 'public/js/libs.js',
+        dest: 'public/js/libs.min.js'
       }
     },
 
@@ -52,7 +55,15 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
-      //your code here
+        options: {
+        shorthandCompacting: false,
+        roundingPrecision: -1
+      },
+      target: {
+        files: {
+          'public/style.min.css': ['public/style.css']
+         }
+     }
     },
 
     watch: {
@@ -109,12 +120,12 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
-    'mochaTest'
+    'mochaTest', 'jshint'
     //your code here
   ]);
 
   grunt.registerTask('build', [
-    'concat', 'uglify'
+    'concat', 'uglify', 'cssmin'
   ]);
 
   //can be used to auto-deploy.
@@ -128,12 +139,11 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
-    // add your deploy tasks here
+    'build'
   ]);
 
   grunt.registerTask('default', [
     'build', 'test'
-  ])
-
+  ]);
 
 };
