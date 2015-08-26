@@ -33,15 +33,14 @@ module.exports = function(grunt) {
 
 
     jshint: {
-      files: [
-        // Add filespec list here
-      ],
+        files: ['*.js', 'lib/*.js'],
       options: {
         force: 'true',
         jshintrc: '.jshintrc',
         ignores: [
           'public/lib/**/*.js',
-          'public/dist/**/*.js'
+          'public/dist/**/*.js',
+          'public/js/*.js'
         ]
       }
     },
@@ -74,12 +73,14 @@ module.exports = function(grunt) {
         tasks: ['cssmin']
       },
       server: {
-        //your code here
+        files: [ '*.*' ],
+        tasks: [ 'jshint', 'test' ]
       }
     },
 
     shell: {
       prodServer: {
+        command: './deploy.sh'
         //can be used to auto-deploy to Heroku/Azure.
       }
     },
@@ -93,6 +94,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
+  //grunt.loadNpmTasks('grunt-heroku-deploy');
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
@@ -131,7 +133,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
-    'build'
+    'build', 'test', 'shell:prodServer'
   ]);
 
   grunt.registerTask('default', [
@@ -139,3 +141,5 @@ module.exports = function(grunt) {
   ]);
 
 };
+
+
