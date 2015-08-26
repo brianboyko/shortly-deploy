@@ -47,3 +47,4 @@ node_modules
 ### Remove from Production ###
 /public/client/*.js
 /app/db/*.sqlite
+db/shortly.sqlite
